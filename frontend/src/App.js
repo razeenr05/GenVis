@@ -199,10 +199,12 @@ function App() {
     if (Number.isNaN(date.getTime())) return timestamp;
     const diffMs = Date.now() - date.getTime();
     if (diffMs < 60 * 1000) return 'Just now';
-    if (diffMs < 60 * 60 * 1000) {
+    if (diffMs < 10 * 60 * 1000) {
       const mins = Math.floor(diffMs / (60 * 1000));
       return `${mins}m ago`;
     }
+    if (diffMs < 30 * 60 * 1000) return '10m ago';
+    if (diffMs < 60 * 60 * 1000) return '30m ago';
     if (diffMs < 24 * 60 * 60 * 1000) {
       const hours = Math.floor(diffMs / (60 * 60 * 1000));
       return `${hours}h ago`;

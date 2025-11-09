@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List
 
 from fastapi import FastAPI, HTTPException
@@ -37,7 +37,7 @@ class ReportingRequest(BaseModel):
 
 # === Activity cache & helpers ===
 def _now_iso() -> str:
-    return datetime.utcnow().isoformat()
+    return datetime.now(timezone.utc).isoformat()
 
 
 def _count_items(value: Any) -> int:
