@@ -193,6 +193,24 @@ function App() {
     }
   };
 
+  const formatRelativeTime = (timestamp) => {
+    if (!timestamp) return 'Not yet';
+    const date = new Date(timestamp);
+    if (Number.isNaN(date.getTime())) return timestamp;
+    const diffMs = Date.now() - date.getTime();
+    if (diffMs < 60 * 1000) return 'Just now';
+    if (diffMs < 60 * 60 * 1000) {
+      const mins = Math.floor(diffMs / (60 * 1000));
+      return `${mins}m ago`;
+    }
+    if (diffMs < 24 * 60 * 60 * 1000) {
+      const hours = Math.floor(diffMs / (60 * 60 * 1000));
+      return `${hours}h ago`;
+    }
+    const days = Math.floor(diffMs / (24 * 60 * 60 * 1000));
+    return `${days}d ago`;
+  };
+
   const statusData = integrationStatus || {};
   const jiraStatus = statusData.jira || {};
   const slackStatus = statusData.slack || {};
@@ -212,27 +230,30 @@ function App() {
       </header>
       <div className="integration-status-strip">
         <div className="status-item">
-          <p className="status-title">Jira Connected</p>
+          <p className="status-title">Last Jira Sync</p>
+          <p className="status-value">{formatRelativeTime(jiraStatus.last_sync) || 'Not yet'}</p>
           <p className="status-subtitle">
-            {jiraStatus.last_sync
-              ? `Last sync ${formatTime(jiraStatus.last_sync)} • ${jiraStatus.total_synced || 0} total issues`
-              : 'Awaiting first sync'}
+            {`${jiraStatus.new_stories || 0} new • ${jiraStatus.total_synced || 0} total • ${
+              jiraStatus.completed_items || 0
+            } done`}
           </p>
         </div>
         <div className="status-item">
-          <p className="status-title">Slack Ready</p>
+          <p className="status-title">Last Slack Broadcast</p>
+          <p className="status-value">{formatRelativeTime(slackStatus.last_post) || 'Not yet'}</p>
           <p className="status-subtitle">
-            {slackStatus.last_post
-              ? `Posted ${formatTime(slackStatus.last_post)}`
+            {slackStatus.last_summary
+              ? `"${slackStatus.last_summary}"`
               : `Channel ${slackStatus.channel || '#product-updates'}`}
           </p>
         </div>
         <div className="status-item">
-          <p className="status-title">Vision Insights Active</p>
+          <p className="status-title">Last AI Run</p>
+          <p className="status-value">{formatRelativeTime(insightStatus.updated_at) || 'Not yet'}</p>
           <p className="status-subtitle">
-            {insightStatus.updated_at
-              ? `Updated ${formatTime(insightStatus.updated_at)}`
-              : 'Waiting for first run'}
+            {`${insightStatus.pain_points || 0} pain points • ${insightStatus.product_ideas || 0} ideas • ${
+              insightStatus.user_stories || 0
+            } stories`}
           </p>
         </div>
       </div>
@@ -258,42 +279,6 @@ function App() {
       </nav>
 
       <div className="container">
-        <section className="integration-banner">
-          <div className="integration-card">
-            <p>Jira Sync</p>
-            <strong>
-              {jiraStatus.last_sync ? `Synced ${formatTime(jiraStatus.last_sync)}` : 'Awaiting sync'}
-            </strong>
-            <span className="integration-subtext">
-              {`${jiraStatus.new_stories || 0} new • ${jiraStatus.total_synced || 0} total • ${
-                jiraStatus.completed_items || 0
-              } done`}
-            </span>
-          </div>
-          <div className="integration-card">
-            <p>Slack Broadcast</p>
-            <strong>
-              {slackStatus.last_post ? `Posted ${formatTime(slackStatus.last_post)}` : 'Ready to post'}
-            </strong>
-            <span className="integration-subtext">
-              {slackStatus.last_summary
-                ? `"${slackStatus.last_summary}"`
-                : `Channel ${slackStatus.channel || '#product-updates'}`}
-            </span>
-          </div>
-          <div className="integration-card">
-            <p>Vision Insights</p>
-            <strong>
-              {insightStatus.updated_at ? `Updated ${formatTime(insightStatus.updated_at)}` : 'No runs yet'}
-            </strong>
-            <span className="integration-subtext">
-              {`${insightStatus.pain_points || 0} pain points • ${insightStatus.product_ideas || 0} ideas • ${
-                insightStatus.user_stories || 0
-              } stories`}
-            </span>
-          </div>
-        </section>
-
         <main className="content">
           {error && <div className="alert error"> {String(error)}</div>}
 
