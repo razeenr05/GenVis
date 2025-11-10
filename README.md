@@ -6,11 +6,9 @@ GenVis is an AI-driven productivity tool built for Product Managers to transform
 
 Originally built for **PNC Bank’s Product Innovation Challenge** at **HackUTD 2025**, GenVis accelerates the product lifecycle from **Ideation → Planning → Reporting**, while meeting the following two HackUTD challenges:
 
-1. **AI-Powered Productivity Challenge (Product Managers)**  
-   - GenVis reimagines AI across the product lifecycle, assisting with ideation, requirements drafting, market research synthesis, prototyping/testing, GTM strategy, and automation of repetitive PM tasks.
-   
-2. **NVIDIA Nemotron Intelligent Agent Challenge**  
-   - GenVis leverages Nemotron for multi-step reasoning, workflow orchestration, API integration, and real-world impact. The system demonstrates AI taking action—pushing tasks to Jira, broadcasting updates to Slack, and automating reporting.
+---
+
+Placeholder
 
 ---
 
@@ -34,8 +32,8 @@ Originally built for **PNC Bank’s Product Innovation Challenge** at **HackUTD 
 - **Slack Incoming Webhooks** for reports.
 
 ### Caching & Timing Mechanism
-- API responses and AI outputs are **cached temporarily** to reduce redundant requests and accelerate repeated queries.
-- Cached items are timestamped to ensure **freshness** while improving response speed for frequently accessed tasks, improving UX on the frontend.
+- API responses and AI outputs are **cached temporarily**.
+- Cached items are timestamped to show when each system was last used.
 
 ---
 
@@ -46,7 +44,7 @@ Originally built for **PNC Bank’s Product Innovation Challenge** at **HackUTD 
 | **Frontend**  | React, JavaScript, HTML/CSS, Lucide Icons |
 | **Backend**   | FastAPI (Python)                          |
 | **AI Model**  | NVIDIA Nemotron-Nano-9B                   |
-| **Integration**| Jira REST API, Slack Incoming Webhooks   |
+| **Integration**| Jira REST API, Slack  Webhooks   |
 | **Environment**| Python 3.9+ with `venv`                  |
 | **Hosting (planned)** | AWS / Render / GCP                  |
 
@@ -74,7 +72,7 @@ venv\Scripts\activate    # Windows
 pip install -r requirements.txt
 ```
 
-Create `backend/.env` from `.env.example` and configure your keys:
+Create `backend/.env` from `.env.example` and configure your keys from the respective websites:
 
 ```env
 # Nemotron
@@ -102,8 +100,6 @@ Run the backend:
 ```bash
 uvicorn mock_api:app --reload
 ```
-
-Backend runs at `http://127.0.0.1:8000`.
 
 ### 3. Frontend Setup
 Set up the frontend and start the app:
@@ -148,22 +144,22 @@ GenVis/
 
 ## Roadmap
 
-* Deploy to cloud infrastructure (Render / AWS / GCP)
+* Deploy to cloud infrastructure (Render / AWS / GCP) (For easy use)
 * Build analytics dashboards for AI insights and sprint metrics
-* Enhance Slack bot with **interactive, two-way communication**
-* Further fine-tune the AI model for **regulated industries**
-* Expand caching and timing mechanism to optimize AI throughput
+* Enhance Slack bot with two way communication
+* Further fine tune the AI responses
+* Use PostgreSQL to permanently log use times (Helps know when tasks are being created or done)
 
 ---
 
 ## Summary
 
-GenVis streamlines product ideation, requirement drafting, and executive reporting by connecting AI-generated insights directly to enterprise tools like **Jira** and **Slack**. Initially tailored for PNC’s product workflow, GenVis scales to any organization seeking **AI-assisted product delivery**, demonstrating **multi-step reasoning, workflow orchestration, and integration** as envisioned in HackUTD 2025’s challenges.
+GenVis helps with product ideation, requirement drafting, and executive reporting by connecting AI generated insights directly to enterprise tools like **Jira** and **Slack**. Initially tailored for PNC’s product workflow, GenVis scales to any organization seeking **AI-assisted product delivery**, to help with workflow and save time on short-term tasks. 
 
 ---
 
 ## Contributors
 
-- **Isaac Pandyan** – Backend & Frontend  
-- **Krish Patel** – Backend & Frontend  
-- **Razeen Rahman** – Backend & Frontend
+- **Isaac Pandyan** 
+- **Krish Patel**
+- **Razeen Rahman** 
