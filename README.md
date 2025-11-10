@@ -1,6 +1,5 @@
-# GenVis
-## Short for Generative Vision (Genius)
-## A Nemotron AI-Powered Product Management Assistant
+# GenVis - Generative Vision Product Manager
+## A Nemotron AI-Powered Assistant
 
 GenVis is an AI-driven productivity tool built for Product Managers to transform raw ideas into actionable plans, structured requirements, and automated sprint reports fully integrated with Jira and Slack.
 
