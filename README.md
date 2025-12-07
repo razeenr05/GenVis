@@ -5,12 +5,6 @@ GenVis is an AI-driven productivity tool built for Product Managers to transform
 
 Originally built for **PNC Bank’s Product Innovation Challenge** at **HackUTD 2025**, GenVis accelerates the product lifecycle from **Ideation → Planning → Reporting**, while meeting the following two HackUTD challenges:
 
----
-
-Placeholder
-
----
-
 ## Features
 
 ### Product Ideation Assistant
